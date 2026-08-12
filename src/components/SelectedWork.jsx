@@ -49,13 +49,18 @@ export default function SelectedWork() {
               <div>
                 {/* Category, Institution Logo & Badge */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                     {(study.logoDomain || study.customLogoUrl) && (
                       <InstitutionLogo domain={study.logoDomain} name={study.institution} size={study.logoSize || 64} customLogo={study.customLogoUrl} invertInLight={study.invertInLight} />
                     )}
                     <span className="badge" style={{ backgroundColor: 'rgba(183, 93, 62, 0.12)', color: 'var(--accent-terracotta)' }}>
                       {study.category}
                     </span>
+                    {study.institutionLabel && (
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                        {study.institutionLabel}
+                      </span>
+                    )}
                   </div>
                   <FileText size={18} color="var(--text-muted)" />
                 </div>

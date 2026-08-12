@@ -195,6 +195,7 @@ export const caseStudies = [
     category: "Market Research",
     institution: "UNSW (University of New South Wales)",
     logoDomain: "unsw.edu.au",
+    institutionLabel: "UNSW Australia",
     logoSize: 64,
     documentUrl: "/documents/UNSW_Certificate.pdf",
     documentLabel: "View Certificate",
@@ -257,7 +258,7 @@ export const leadershipRoles = [
     role: "Finance & Legal Director",
     organization: "180 Degrees Consulting VNIT",
     logoDomain: "180dc.org",
-    logoSize: 64,
+    logoSize: 100,
     period: "2024 - Present",
     desc: "Overseeing financial allocation, legal compliance, project contracting, and commercial strategy for student-led social impact consulting engagements.",
     highlights: ["Financial governance", "Legal framework design", "Non-profit client contracting"]
@@ -267,7 +268,8 @@ export const leadershipRoles = [
     organization: "Entrepreneurship Cell VNIT",
     logoDomain: "vnit.ac.in",
     customLogoUrl: "/ecell-logo.png",
-    logoSize: 64,
+    logoSize: 100,
+    blendWhite: true,
     period: "2023 - Present",
     desc: "Managing annual organizational budget, securing corporate sponsorships, and expanding regional founder incubation ecosystems.",
     highlights: ["Budget stewardship", "Corporate partnerships", "Ecosystem expansion"]

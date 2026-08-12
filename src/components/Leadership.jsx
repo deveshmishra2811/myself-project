@@ -48,7 +48,7 @@ export default function Leadership() {
                     {role.period}
                   </span>
                   {(role.logoDomain || role.customLogoUrl) && (
-                    <InstitutionLogo domain={role.logoDomain} name={role.organization} size={role.logoSize || 64} customLogo={role.customLogoUrl} bg={role.logoBg} invertInLight={role.invertInLight} />
+                    <InstitutionLogo domain={role.logoDomain} name={role.organization} size={role.logoSize || 64} customLogo={role.customLogoUrl} bg={role.logoBg} invertInLight={role.invertInLight} blendWhite={role.blendWhite} />
                   )}
                 </div>
 

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
  * InstitutionLogo - Renders an institution's logo from Clearbit or Google Favicon API
  * with graceful fallback to an initial-letter avatar.
  */
-export default function InstitutionLogo({ domain, name, size = 48, customLogo, bg = 'transparent', invertInLight = false }) {
+export default function InstitutionLogo({ domain, name, size = 48, customLogo, bg = 'transparent', invertInLight = false, blendWhite = false }) {
   const [imgError, setImgError] = useState(false);
   const [useFallbackApi, setUseFallbackApi] = useState(false);
 
@@ -47,7 +47,7 @@ export default function InstitutionLogo({ domain, name, size = 48, customLogo, b
         alt={`${name} logo`}
         title={name}
         className={invertInLight ? 'invert-in-light' : ''}
-        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+        style={{ width: '100%', height: '100%', objectFit: 'contain', ...(blendWhite ? { mixBlendMode: 'multiply' } : {}) }}
         onError={() => {
           if (customLogo) {
             setImgError(true);
