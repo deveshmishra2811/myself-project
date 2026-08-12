@@ -176,7 +176,31 @@ export default function CaseStudyModal({ study, onClose }) {
         </div>
 
         {/* Footer Action */}
-        <div style={{ marginTop: '36px', display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ marginTop: '36px', display: 'flex', justifyContent: 'flex-end', gap: '16px' }}>
+          {study.documentUrl && (
+            <a 
+              href={study.documentUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 20px',
+                backgroundColor: 'rgba(183, 93, 62, 0.15)',
+                color: 'var(--accent-terracotta)',
+                border: '1px solid rgba(183, 93, 62, 0.3)',
+                borderRadius: '8px',
+                fontWeight: 600,
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <ExternalLink size={18} />
+              {study.documentLabel || 'View Document'}
+            </a>
+          )}
           <button onClick={onClose} className="btn btn-primary">
             <span>Close Case Study</span>
           </button>

@@ -84,6 +84,8 @@ export const caseStudies = [
     institution: "ECONE (Recyclink)",
     logoDomain: "econe.in",
     customLogoUrl: "/econe-logo.png",
+    documentUrl: "https://econe.vercel.app/",
+    documentLabel: "Website",
     summary: "Engineered high-durability Polypropylene-Basalt hybrid construction formwork to replace timber plywood, backed by a circular rental business model.",
     metrics: [
       { label: "Cost Reduction", value: ">35%" },
