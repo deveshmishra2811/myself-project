@@ -34,21 +34,21 @@ export default function Footer() {
               style={{
                 width: '28px',
                 height: '28px',
-                borderRadius: '6px',
-                backgroundColor: 'var(--accent-kiln)',
+                borderRadius: '8px',
+                background: 'linear-gradient(135deg, var(--accent-kiln), var(--accent-terracotta))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 800,
+                fontSize: '0.65rem'
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,15 80,45 65,85 35,85 20,45" stroke="#8DAA9D" strokeWidth="6" fill="none"/>
-                <line x1="50" y1="15" x2="50" y2="85" stroke="#B75D3E" strokeWidth="5"/>
-              </svg>
+              DM
             </div>
             <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.95rem' }}>
-              Devesh Mishra — Wollastonite Theme Portfolio
+              Devesh Mishra
             </span>
           </div>
 

@@ -1,118 +1,83 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { capabilities } from '../data/portfolioData';
-import { Check, Sparkles, Layers } from 'lucide-react';
+import { Recycle, Leaf, Brain, Briefcase, Code2 } from 'lucide-react';
+import useScrollReveal from '../hooks/useScrollReveal';
+
+const categoryIcons = [
+  <Recycle key="0" size={22} />,
+  <Leaf key="1" size={22} />,
+  <Brain key="2" size={22} />,
+  <Briefcase key="3" size={22} />,
+  <Code2 key="4" size={22} />
+];
 
 export default function Capabilities() {
-  const [selectedCategory, setSelectedCategory] = useState(0);
+  const sectionRef = useScrollReveal();
 
   return (
-    <section id="capabilities" className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
+    <section id="capabilities" className="section dot-grid-bg" ref={sectionRef}>
       <div className="container">
         
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header reveal">
           <div className="section-tag">04 / Capabilities</div>
           <h2 className="section-title">
-            Capabilities & Problem-Solving Matrix
+            Skills & Technical Expertise
           </h2>
           <p style={{ maxWidth: '640px', marginTop: '12px', fontSize: '1.05rem' }}>
-            Grouped by the specific engineering, sustainability, decision science, and business problems I am trained to solve.
+            Capabilities grouped by the problems they solve - from waste valorisation to digital execution.
           </p>
         </div>
 
-        {/* Categories Tab Selector */}
+        {/* Capabilities Grid */}
         <div 
           style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '12px',
-            marginBottom: '36px'
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '24px'
           }}
         >
-          {capabilities.map((cat, idx) => {
-            const isActive = selectedCategory === idx;
-            return (
-              <button
-                key={cat.category}
-                onClick={() => setSelectedCategory(idx)}
-                style={{
-                  backgroundColor: isActive ? 'var(--accent-terracotta)' : 'var(--bg-card)',
-                  color: isActive ? '#FFFFFF' : 'var(--text-primary)',
-                  border: isActive ? '1px solid var(--accent-terracotta)' : '1px solid var(--border-color)',
-                  borderRadius: '30px',
-                  padding: '10px 22px',
-                  fontFamily: 'var(--font-heading)',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  boxShadow: isActive ? '0 4px 12px rgba(183, 93, 62, 0.25)' : 'none'
-                }}
-              >
-                {cat.category}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Selected Category Skill Matrix Cards */}
-        <div 
-          style={{
-            backgroundColor: 'var(--bg-card)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '16px',
-            padding: '36px',
-            boxShadow: 'var(--shadow-md)'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-            <Sparkles size={20} color="var(--accent-terracotta)" />
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-              {capabilities[selectedCategory].category} Capabilities
-            </h3>
-          </div>
-
-          <div 
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '16px'
-            }}
-          >
-            {capabilities[selectedCategory].skills.map((skill, i) => (
-              <div 
-                key={i}
-                style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '10px',
-                  padding: '16px 20px',
+          {capabilities.map((cap, idx) => (
+            <div 
+              key={idx} 
+              className="card-3d reveal"
+              style={{
+                transitionDelay: `${idx * 0.08}s`
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  backgroundColor: 'var(--accent-sage-light)',
+                  border: '1px solid rgba(141, 170, 157, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '12px'
-                }}
-              >
-                <div 
-                  style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--accent-sage-light)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--accent-terracotta)',
-                    flexShrink: 0
-                  }}
-                >
-                  <Check size={14} />
+                  justifyContent: 'center',
+                  color: 'var(--accent-terracotta)',
+                  flexShrink: 0
+                }}>
+                  {categoryIcons[idx]}
                 </div>
-                <span style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
-                  {skill}
-                </span>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  {cap.category}
+                </h3>
               </div>
-            ))}
-          </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {cap.skills.map((skill, i) => (
+                  <span 
+                    key={i} 
+                    className="badge"
+                    style={{ fontSize: '0.72rem' }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

@@ -1,17 +1,20 @@
 import React from 'react';
 import { aboutNarrative, personalInfo } from '../data/portfolioData';
-import { Sparkles, Quote, MapPin, GraduationCap } from 'lucide-react';
+import { Quote, MapPin, GraduationCap } from 'lucide-react';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function About() {
+  const sectionRef = useScrollReveal();
+
   return (
-    <section id="about" className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
+    <section id="about" className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }} ref={sectionRef}>
       <div className="container">
         
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header reveal">
           <div className="section-tag">06 / About</div>
           <h2 className="section-title">
-            The Wollastonite Metaphor & Professional Mindset
+            Where Material Science Meets Execution
           </h2>
         </div>
 
@@ -19,17 +22,15 @@ export default function About() {
           
           {/* Main Narrative Card */}
           <div 
+            className="card-3d reveal"
             style={{
-              backgroundColor: 'var(--bg-card)',
-              border: '1px solid var(--border-color)',
-              borderRadius: '20px',
               padding: '40px',
               boxShadow: 'var(--shadow-md)'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <Quote size={28} color="var(--accent-terracotta)" />
-              <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.15rem', color: 'var(--text-primary)' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '20px' }}>
+              <Quote size={28} color="var(--accent-terracotta)" style={{ flexShrink: 0, marginTop: '4px' }} />
+              <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.15rem', color: 'var(--text-primary)', lineHeight: 1.4 }}>
                 {aboutNarrative.quote}
               </p>
             </div>
@@ -41,9 +42,9 @@ export default function About() {
             </div>
           </div>
 
-          {/* Quick Context Card */}
+          {/* Quick Context Cards */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div className="card" style={{ padding: '28px' }}>
+            <div className="card-3d reveal" style={{ padding: '28px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                 <GraduationCap size={22} color="var(--accent-terracotta)" />
                 <h4 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Education</h4>
@@ -52,7 +53,7 @@ export default function About() {
               <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>VNIT Nagpur · Expected Graduation 2028</p>
             </div>
 
-            <div className="card" style={{ padding: '28px' }}>
+            <div className="card-3d reveal" style={{ padding: '28px', transitionDelay: '0.1s' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                 <MapPin size={22} color="var(--accent-terracotta)" />
                 <h4 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Location & Base</h4>

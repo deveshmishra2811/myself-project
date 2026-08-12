@@ -27,7 +27,7 @@ export default function App() {
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       
       <main style={{ flex: 1 }}>
-        <Hero isDarkMode={theme === 'dark'} />
+        <Hero />
         <ImpactStrip />
         <SelectedWork />
         <WorkingMethod />

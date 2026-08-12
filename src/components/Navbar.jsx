@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, Download, Compass, ShieldAlert } from 'lucide-react';
+import { Sun, Moon, Menu, X, Download } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Navbar({ theme, toggleTheme }) {
@@ -8,11 +8,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -29,14 +25,15 @@ export default function Navbar({ theme, toggleTheme }) {
 
   return (
     <header 
+      className={scrolled ? 'glass' : ''}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 1000,
-        backgroundColor: scrolled ? 'var(--bg-header)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        backgroundColor: scrolled ? undefined : 'transparent',
+        backdropFilter: scrolled ? undefined : 'none',
         borderBottom: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
         transition: 'all 0.3s ease'
       }}
@@ -47,40 +44,28 @@ export default function Navbar({ theme, toggleTheme }) {
           <div style={{
             width: '36px',
             height: '36px',
-            borderRadius: '8px',
-            backgroundColor: 'var(--accent-kiln)',
+            borderRadius: '10px',
+            background: 'linear-gradient(135deg, var(--accent-kiln), var(--accent-terracotta))',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: '#FFFFFF',
-            border: '1px solid var(--accent-sage)'
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 800,
+            fontSize: '1rem',
+            boxShadow: '0 4px 12px rgba(183, 93, 62, 0.25)'
           }}>
-            <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
-              <polygon points="50,15 80,45 65,85 35,85 20,45" stroke="#8DAA9D" strokeWidth="6" fill="none"/>
-              <line x1="50" y1="15" x2="50" y2="85" stroke="#B75D3E" strokeWidth="5"/>
-            </svg>
+            DM
           </div>
-          <div>
-            <span style={{ 
-              fontFamily: 'var(--font-heading)', 
-              fontWeight: 800, 
-              fontSize: '1.15rem', 
-              letterSpacing: '-0.02em',
-              color: 'var(--text-primary)',
-              display: 'block'
-            }}>
-              DEVESH MISHRA
-            </span>
-            <span style={{ 
-              fontFamily: 'var(--font-mono)', 
-              fontSize: '0.68rem', 
-              color: 'var(--accent-terracotta)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em'
-            }}>
-              Wollastonite Theme
-            </span>
-          </div>
+          <span style={{ 
+            fontFamily: 'var(--font-heading)', 
+            fontWeight: 800, 
+            fontSize: '1.15rem', 
+            letterSpacing: '-0.02em',
+            color: 'var(--text-primary)'
+          }}>
+            DEVESH MISHRA
+          </span>
         </a>
 
         {/* Desktop Navigation */}
@@ -94,7 +79,8 @@ export default function Navbar({ theme, toggleTheme }) {
                 fontWeight: 500,
                 fontSize: '0.9rem',
                 color: 'var(--text-secondary)',
-                transition: 'color 0.2s ease'
+                transition: 'color 0.2s ease',
+                position: 'relative'
               }}
               onMouseEnter={(e) => e.target.style.color = 'var(--accent-terracotta)'}
               onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
@@ -105,7 +91,7 @@ export default function Navbar({ theme, toggleTheme }) {
         </nav>
 
         {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
@@ -136,7 +122,7 @@ export default function Navbar({ theme, toggleTheme }) {
             style={{ padding: '8px 18px', fontSize: '0.85rem' }}
           >
             <Download size={15} />
-            <span>Résumé</span>
+            <span>Resume</span>
           </a>
 
           {/* Mobile Menu Toggle Button */}
@@ -158,8 +144,8 @@ export default function Navbar({ theme, toggleTheme }) {
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
         <div 
+          className="glass"
           style={{
-            backgroundColor: 'var(--bg-card)',
             borderBottom: '1px solid var(--border-color)',
             padding: '20px 24px',
             display: 'flex',

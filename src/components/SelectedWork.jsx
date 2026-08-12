@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, CheckCircle2, ChevronRight, Layers, FileText } from 'lucide-react';
+import { ArrowUpRight, FileText, ExternalLink } from 'lucide-react';
 import { caseStudies } from '../data/portfolioData';
 import CaseStudyModal from './CaseStudyModal';
+import InstitutionLogo from './InstitutionLogo';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function SelectedWork() {
   const [selectedStudy, setSelectedStudy] = useState(null);
+  const sectionRef = useScrollReveal();
 
   return (
-    <section id="work" className="section">
+    <section id="work" className="section" ref={sectionRef}>
       <div className="container">
         
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header reveal">
           <div className="section-tag">01 / Selected Work</div>
           <h2 className="section-title">
             Engineering, LCA & Venture Case Studies
@@ -29,25 +32,31 @@ export default function SelectedWork() {
             gap: '32px'
           }}
         >
-          {caseStudies.map((study) => (
+          {caseStudies.map((study, idx) => (
             <div 
               key={study.id} 
-              className="card"
+              className="card-3d reveal"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 cursor: 'pointer',
-                position: 'relative'
+                position: 'relative',
+                transitionDelay: `${idx * 0.08}s`
               }}
               onClick={() => setSelectedStudy(study)}
             >
               <div>
-                {/* Category & Badge */}
+                {/* Category, Institution Logo & Badge */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                  <span className="badge" style={{ backgroundColor: 'rgba(183, 93, 62, 0.12)', color: 'var(--accent-terracotta)' }}>
-                    {study.category}
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    {(study.logoDomain || study.customLogoUrl) && (
+                      <InstitutionLogo domain={study.logoDomain} name={study.institution} size={study.logoSize || 64} customLogo={study.customLogoUrl} invertInLight={study.invertInLight} />
+                    )}
+                    <span className="badge" style={{ backgroundColor: 'rgba(183, 93, 62, 0.12)', color: 'var(--accent-terracotta)' }}>
+                      {study.category}
+                    </span>
+                  </div>
                   <FileText size={18} color="var(--text-muted)" />
                 </div>
 
@@ -69,10 +78,10 @@ export default function SelectedWork() {
 
               <div>
                 {/* Metrics Pills */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
-                  {study.metrics.map((m, idx) => (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
+                  {study.metrics.map((m, mIdx) => (
                     <span 
-                      key={idx} 
+                      key={mIdx} 
                       style={{
                         fontFamily: 'var(--font-mono)',
                         fontSize: '0.75rem',
@@ -88,10 +97,25 @@ export default function SelectedWork() {
                   ))}
                 </div>
 
-                {/* Action CTA */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, color: 'var(--accent-terracotta)', fontSize: '0.95rem' }}>
-                  <span>Read Full Case Study</span>
-                  <ArrowUpRight size={18} />
+                {/* Actions Row */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, color: 'var(--accent-terracotta)', fontSize: '0.95rem' }}>
+                    <span>Read Full Case Study</span>
+                    <ArrowUpRight size={18} />
+                  </div>
+
+                  {study.documentUrl && (
+                    <a 
+                      href={study.documentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="doc-link"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <ExternalLink size={13} />
+                      {study.documentLabel || 'View Document'}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

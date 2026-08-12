@@ -1,27 +1,56 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useRef, useState } from 'react';
 import { impactMetrics } from '../data/portfolioData';
 
-export default function ImpactStrip() {
-  const containerRef = useRef(null);
+function AnimatedCounter({ value, prefix = '', suffix = '', decimals = 0 }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.impact-card', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out'
-      });
-    }, containerRef);
+    const el = ref.current;
+    if (!el) return;
 
-    return () => ctx.revert();
-  }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          const duration = 1800;
+          const startTime = performance.now();
+
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(eased * value);
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value]);
+
+  const displayValue = decimals > 0 ? count.toFixed(decimals) : Math.round(count);
 
   return (
+    <span ref={ref}>
+      {prefix}{displayValue}{suffix}
+    </span>
+  );
+}
+
+export default function ImpactStrip() {
+  return (
     <section 
-      ref={containerRef}
       style={{
         backgroundColor: 'var(--bg-secondary)',
         borderTop: '1px solid var(--border-color)',
@@ -39,16 +68,13 @@ export default function ImpactStrip() {
             gap: '24px'
           }}
         >
-          {impactMetrics.map((item) => (
+          {impactMetrics.map((item, idx) => (
             <div 
               key={item.id} 
-              className="impact-card"
+              className="card-3d"
               style={{
-                backgroundColor: 'var(--bg-card)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '12px',
-                padding: '24px',
-                transition: 'all 0.3s ease'
+                padding: '28px',
+                animationDelay: `${idx * 0.1}s`
               }}
             >
               <div 
@@ -61,7 +87,12 @@ export default function ImpactStrip() {
                   marginBottom: '8px'
                 }}
               >
-                {item.value}
+                <AnimatedCounter 
+                  value={item.value} 
+                  prefix={item.prefix || ''} 
+                  suffix={item.suffix || ''} 
+                  decimals={item.decimals || 0}
+                />
               </div>
 
               <div 

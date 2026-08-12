@@ -1,14 +1,18 @@
 import React from 'react';
 import { leadershipRoles } from '../data/portfolioData';
-import { ShieldCheck, Briefcase, Award, Users } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import InstitutionLogo from './InstitutionLogo';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function Leadership() {
+  const sectionRef = useScrollReveal();
+
   return (
-    <section id="leadership" className="section">
+    <section id="leadership" className="section" ref={sectionRef}>
       <div className="container">
         
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header reveal">
           <div className="section-tag">03 / Leadership & Ecosystem</div>
           <h2 className="section-title">
             Leadership, Governance & Ecosystem Building
@@ -29,19 +33,23 @@ export default function Leadership() {
           {leadershipRoles.map((role, idx) => (
             <div 
               key={idx} 
-              className="card"
+              className="card-3d reveal"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                transitionDelay: `${idx * 0.08}s`
               }}
             >
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                {/* Period & Logo */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent-terracotta)', fontWeight: 600 }}>
                     {role.period}
                   </span>
-                  <Briefcase size={18} color="var(--accent-sage)" />
+                  {(role.logoDomain || role.customLogoUrl) && (
+                    <InstitutionLogo domain={role.logoDomain} name={role.organization} size={role.logoSize || 64} customLogo={role.customLogoUrl} bg={role.logoBg} invertInLight={role.invertInLight} />
+                  )}
                 </div>
 
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '6px', color: 'var(--text-primary)' }}>
@@ -58,15 +66,25 @@ export default function Leadership() {
               </div>
 
               <div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', paddingTop: '16px', borderTop: '1px solid var(--border-color)' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', paddingTop: '16px', borderTop: '1px solid var(--border-color)', alignItems: 'center' }}>
                   {role.highlights.map((h, i) => (
-                    <span 
-                      key={i} 
-                      className="badge"
-                    >
+                    <span key={i} className="badge">
                       {h}
                     </span>
                   ))}
+
+                  {role.documentUrl && (
+                    <a 
+                      href={role.documentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="doc-link"
+                      style={{ marginLeft: 'auto' }}
+                    >
+                      <ExternalLink size={13} />
+                      {role.documentLabel || 'View'}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

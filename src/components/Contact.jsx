@@ -1,6 +1,6 @@
 import React from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { Mail, Phone, Linkedin, Download, Contact, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Mail, Phone, Linkedin, Download, Contact, ExternalLink } from 'lucide-react';
 
 export default function ContactSection() {
   
@@ -33,7 +33,7 @@ END:VCARD`;
         
         <div 
           style={{
-            backgroundColor: 'var(--accent-kiln)',
+            background: 'linear-gradient(135deg, var(--accent-kiln) 0%, #1a4b42 50%, #1f5549 100%)',
             borderRadius: '28px',
             padding: '60px 40px',
             color: '#FFFFFF',
@@ -42,16 +42,28 @@ END:VCARD`;
             overflow: 'hidden'
           }}
         >
-          {/* Background crystalline line accents */}
+          {/* Glassmorphism overlay accent */}
           <div 
             style={{
               position: 'absolute',
-              top: '-50px',
-              right: '-50px',
-              width: '300px',
-              height: '300px',
+              top: '-80px',
+              right: '-80px',
+              width: '350px',
+              height: '350px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(141, 170, 157, 0.15) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(224, 122, 95, 0.12) 0%, transparent 70%)',
+              pointerEvents: 'none'
+            }}
+          />
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: '-60px',
+              left: '-60px',
+              width: '250px',
+              height: '250px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(141, 170, 157, 0.1) 0%, transparent 70%)',
               pointerEvents: 'none'
             }}
           />
@@ -71,19 +83,19 @@ END:VCARD`;
                 marginBottom: '20px'
               }}
             >
-              Let’s build material solutions that work technically, environmentally, and commercially.
+              Let's build material solutions that work technically, environmentally, and commercially.
             </h2>
 
             <p style={{ fontSize: '1.1rem', color: '#C8D3CF', marginBottom: '40px', lineHeight: 1.6 }}>
-              Whether you are looking for research collaboration in circular economy pathways, LCA evaluation, or deep-tech venture strategy — feel free to reach out.
+              Whether you are looking for research collaboration in circular economy pathways, LCA evaluation, or deep-tech venture strategy - feel free to reach out.
             </p>
 
             {/* Direct Contact Links */}
             <div 
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                gap: '20px',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '16px',
                 marginBottom: '40px'
               }}
             >
@@ -94,19 +106,20 @@ END:VCARD`;
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(8px)',
                   padding: '16px 20px',
-                  borderRadius: '12px',
+                  borderRadius: '14px',
                   color: '#FFFFFF',
                   textDecoration: 'none',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.3s ease'
                 }}
               >
                 <Mail size={20} color="#E07A5F" />
                 <div>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', opacity: 0.7, display: 'block' }}>EMAIL</span>
-                  <span style={{ fontWeight: 600, fontSize: '0.92rem' }}>{personalInfo.email}</span>
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', opacity: 0.6, display: 'block' }}>EMAIL</span>
+                  <span style={{ fontWeight: 600, fontSize: '0.88rem', wordBreak: 'break-all' }}>{personalInfo.email}</span>
                 </div>
               </a>
 
@@ -117,19 +130,20 @@ END:VCARD`;
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(8px)',
                   padding: '16px 20px',
-                  borderRadius: '12px',
+                  borderRadius: '14px',
                   color: '#FFFFFF',
                   textDecoration: 'none',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.3s ease'
                 }}
               >
                 <Phone size={20} color="#8DAA9D" />
                 <div>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', opacity: 0.7, display: 'block' }}>PHONE</span>
-                  <span style={{ fontWeight: 600, fontSize: '0.92rem' }}>{personalInfo.phone}</span>
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', opacity: 0.6, display: 'block' }}>PHONE</span>
+                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>{personalInfo.phone}</span>
                 </div>
               </a>
 
@@ -142,19 +156,20 @@ END:VCARD`;
                   display: 'flex',
                   alignItems: 'center',
                   gap: '14px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(8px)',
                   padding: '16px 20px',
-                  borderRadius: '12px',
+                  borderRadius: '14px',
                   color: '#FFFFFF',
                   textDecoration: 'none',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.3s ease'
                 }}
               >
                 <Linkedin size={20} color="#E07A5F" />
                 <div>
-                  <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', opacity: 0.7, display: 'block' }}>LINKEDIN</span>
-                  <span style={{ fontWeight: 600, fontSize: '0.92rem' }}>Devesh Mishra</span>
+                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', opacity: 0.6, display: 'block' }}>LINKEDIN</span>
+                  <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>Devesh Mishra</span>
                 </div>
               </a>
             </div>
@@ -174,10 +189,10 @@ END:VCARD`;
                 href={personalInfo.resumeUrl} 
                 download 
                 className="btn btn-secondary"
-                style={{ color: '#FFFFFF', borderColor: 'rgba(255, 255, 255, 0.3)' }}
+                style={{ color: '#FFFFFF', borderColor: 'rgba(255, 255, 255, 0.25)' }}
               >
                 <Download size={18} />
-                <span>Download Official Résumé</span>
+                <span>Download Official Resume</span>
               </a>
             </div>
 
